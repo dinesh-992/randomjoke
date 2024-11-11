@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        #parent {
+  position: relative; /* Make the parent a relative positioning context */
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+}
+
+.new {
+  position: absolute; /* Make the child positioned absolutely */
+  top: 50%; /* Center vertically by setting top to 50% */
+  left: 50%; /* Center horizontally by setting left to 50% */
+  transform: translate(-50%, -50%); /* Offset the child by half its width and height */
+  width: 300px; /* Maintain width */
+  border: 2px dashed red; /* Maintain border */
+  color: yellow;
+  padding: 20px;
+  font-size: 2em;
+}
+    </style>
+<div id="parent"></div>
+
+    <script>
+let parent=document.getElementById('parent')
+const url = 'https://jokes-always.p.rapidapi.com/common';
+const options = {
+	method: 'GET',
+	headers: {
+		'x-rapidapi-key': '3f79f06772msh4321aa1d7e6229fp119e1bjsn6e99ea126afc',
+		'x-rapidapi-host': 'jokes-always.p.rapidapi.com'
+	}
+};
+fetch(url,options)
+.then(response=>{
+    if(response.ok){
+        return response.json()
+    }
+})
+.then(function(data1){
+    let parent=document.getElementById('parent')
+    let child=document.createElement('div')
+    child.classList.add('new')
+    child.innerText=`${data1.data}
+    
+                       🗣 Dinesh Tallam 
+                    
+                        `
+    parent.appendChild(child)
+
+})
+.catch(function(data){
+    console.error(`error`,data)
+})
+
+    </script>
+</body>
+</html>
